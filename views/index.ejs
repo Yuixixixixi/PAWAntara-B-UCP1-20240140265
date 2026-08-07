@@ -1,0 +1,39 @@
+<%- include('partials/head') %>
+<%- include('partials/navbar') %>
+<main class="flex-1">
+  <section class="bg-emerald-50 border-b">
+    <div class="max-w-6xl mx-auto px-4 py-12 grid gap-8 md:grid-cols-2 md:items-center">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-bold text-emerald-800">Sembako lengkap, harga jelas, stok ter-update</h1>
+        <p class="mt-4 text-stone-600">Cek harga dan stok sebelum belanja, atau tanya lewat fitur Tanya AI.</p>
+        <div class="mt-6 flex gap-3">
+          <a href="/produk" class="bg-emerald-700 text-white px-5 py-2.5 rounded-lg">Lihat Produk</a>
+          <a href="/tanya-ai" class="border border-emerald-700 text-emerald-800 px-5 py-2.5 rounded-lg">Tanya AI</a>
+        </div>
+      </div>
+      <aside class="bg-white rounded-xl shadow p-6" aria-label="Informasi toko">
+        <h2 class="font-semibold text-lg">Info Toko</h2>
+        <ul class="mt-3 space-y-2 text-sm text-stone-600">
+          <li>Total produk: <strong><%= total %></strong></li>
+          <li>Jam buka: 07.00 - 20.00</li>
+          <li>Antar gratis radius 3 km</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="max-w-6xl mx-auto px-4 py-10">
+    <h2 class="text-2xl font-bold">Produk Pilihan</h2>
+    <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <% preview.forEach(function (p) { %>
+        <article class="bg-white rounded-xl border p-4">
+          <h3 class="font-semibold"><%= p.name %></h3>
+          <p class="text-emerald-700 font-bold mt-1">Rp <%= p.price.toLocaleString('id-ID') %></p>
+          <p class="text-xs text-stone-500 mt-1">Stok: <%= p.stock %> <%= p.unit %></p>
+          <a href="/produk/<%= p.id %>" class="mt-3 inline-block text-sm text-emerald-700">Lihat detail &rarr;</a>
+        </article>
+      <% }); %>
+    </div>
+  </section>
+</main>
+<%- include('partials/footer') %>
