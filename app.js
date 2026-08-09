@@ -1,3 +1,6 @@
+require("dotenv").config();
+const session = require("express-session");
+
 const express = require("express");
 const path = require("path");
 const pageRoutes = require("./routes/pages");
@@ -21,3 +24,15 @@ app.use("/", pageRoutes);
 app.use((req, res) => res.status(404).render("404", { title: "Tidak ditemukan" }));
 
 app.listen(PORT, () => console.log(`Server jalan di http://localhost:${PORT}`));
+app.use(session({
+  secret: process.env.SESSION_SECRET || "rahasia",
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 1000 * 60 * 60 }, // 1 jam
+}));
+
+
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
+});
