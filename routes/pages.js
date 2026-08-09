@@ -45,3 +45,12 @@ router.post("/login", (req, res) => {
 router.post("/logout", (req, res) => {
   req.session.destroy(() => res.redirect("/"));
 });
+
+router.get("/dashboard", requireLogin, (req, res) => {
+  res.render("dashboard", {
+    title: "Dashboard Admin",
+    products,
+    totalStok: products.reduce((a, p) => a + p.stock, 0),
+    nilaiStok: products.reduce((a, p) => a + p.price * p.stock, 0),
+  });
+});
