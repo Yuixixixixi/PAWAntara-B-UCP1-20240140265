@@ -1,22 +1,55 @@
 <header class="bg-emerald-700 text-white sticky top-0 z-20">
   <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
     <a href="/" class="font-bold text-lg">🛒 Toko Sembako Ariesta</a>
-    <button id="hamburgerBtn" class="md:hidden text-2xl px-2" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="mobileMenu">&#9776;</button>
+
+    <button 
+      id="hamburgerBtn" 
+      class="md:hidden text-2xl px-2" 
+      aria-label="Buka menu navigasi" 
+      aria-expanded="false" 
+      aria-controls="mobileMenu"
+    >
+      &#9776;
+    </button>
+
     <nav class="hidden md:block" aria-label="Navigasi utama">
       <ul class="flex gap-6 font-medium">
-        <li><a href="/">Beranda</a></li>
-        <li><a href="/produk">Produk</a></li>
-        <li><a href="/tanya-ai">Tanya AI</a></li>
-        <li><a href="/api/products">API</a></li>
+        <% if (user) { %>
+          <li><a class="hover:underline" href="/dashboard">Dashboard</a></li>
+          <li>
+            <form method="POST" action="/logout">
+              <button type="submit" class="hover:underline">Logout</button>
+            </form>
+          </li>
+        <% } else { %>
+          <li><a class="hover:underline" href="/login">Login</a></li>
+        <% } %>
+
+        <li><a class="hover:underline" href="/">Beranda</a></li>
+        <li><a class="hover:underline" href="/produk">Produk</a></li>
+        <li><a class="hover:underline" href="/tanya-ai">Tanya AI</a></li>
+        <li><a class="hover:underline" href="/api/products">API</a></li>
       </ul>
     </nav>
   </div>
+
   <nav id="mobileMenu" class="hidden md:hidden border-t border-emerald-600" aria-label="Navigasi mobile">
     <ul class="flex flex-col px-4 py-2">
-      <li><a class="block py-2" href="/">Beranda</a></li>
-      <li><a class="block py-2" href="/produk">Produk</a></li>
-      <li><a class="block py-2" href="/tanya-ai">Tanya AI</a></li>
-      <li><a class="block py-2" href="/api/products">API</a></li>
+      <% if (user) { %>
+        <li><a class="block py-2 hover:underline" href="/dashboard">Dashboard</a></li>
+        <li>
+          <form method="POST" action="/logout">
+            <button type="submit" class="block w-full text-left py-2 hover:underline">Logout</button>
+          </form>
+        </li>
+      <% } else { %>
+        <li><a class="block py-2 hover:underline" href="/login">Login</a></li>
+      <% } %>
+
+      <li><a class="block py-2 hover:underline" href="/">Beranda</a></li>
+      <li><a class="block py-2 hover:underline" href="/produk">Produk</a></li>
+      <li><a class="block py-2 hover:underline" href="/tanya-ai">Tanya AI</a></li>
+      <li><a class="block py-2 hover:underline" href="/api/products">API</a></li>
     </ul>
   </nav>
 </header>

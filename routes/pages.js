@@ -26,3 +26,22 @@ router.get("/produk/:id", (req, res) => {
 router.get("/tanya-ai", (req, res) => res.render("tanya-ai", { title: "Tanya AI" }));
 
 module.exports = router;
+const { requireLogin } = require("../middleware/auth");
+
+router.get("/login", (req, res) => {
+  if (req.session.user) return res.redirect("/dashboard");
+  res.render("login", { title: "Login Admin", error: null });
+});
+
+router.post("/login", (req, res) => {
+  const { username, password } = req.body;
+  if (username === process.env.ADMIN_USER && password === process.env.ADMIN_PASS) {
+    req.session.user = { username };
+    return res.redirect("/dashboard");
+  }
+  res.status(401).render("login", { title: "Login Admin", error: "Username atau password salah." });
+});
+
+router.post("/logout", (req, res) => {
+  req.session.destroy(() => res.redirect("/"));
+});

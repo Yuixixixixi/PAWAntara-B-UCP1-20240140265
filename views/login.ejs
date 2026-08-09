@@ -1,0 +1,20 @@
+<%- include('partials/head') %>
+<%- include('partials/navbar') %>
+<main class="flex-1 max-w-md mx-auto px-4 py-12 w-full">
+  <h1 class="text-2xl font-bold">Login Admin</h1>
+  <% if (error) { %>
+    <p class="mt-4 bg-red-50 border border-red-200 text-red-700 rounded-lg p-3 text-sm"><%= error %></p>
+  <% } %>
+  <form method="POST" action="/login" class="mt-6 bg-white border border-stone-200 rounded-xl p-5 grid gap-4">
+    <div>
+      <label for="username" class="block text-sm font-medium">Username</label>
+      <input id="username" name="username" required class="mt-1 w-full border border-stone-300 rounded-lg px-3 py-2" />
+    </div>
+    <div>
+      <label for="password" class="block text-sm font-medium">Password</label>
+      <input type="password" id="password" name="password" required class="mt-1 w-full border border-stone-300 rounded-lg px-3 py-2" />
+    </div>
+    <button class="bg-emerald-700 text-white px-4 py-2 rounded-lg font-medium hover:bg-emerald-800">Masuk</button>
+  </form>
+</main>
+<%- include('partials/footer') %>
